@@ -8,7 +8,7 @@
 # Ejecutamos el comando mvn clean package (Generara un archivo JAR para el despliegue)
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 COPY . .
-#RUN mvn clean package
+RUN mvn clean package
 
 # Usamos una imagen de Openjdk
 # Exponemos el puerto que nuestro componente va a usar para escuchar peticiones
@@ -16,5 +16,5 @@ COPY . .
 # Marcamos el punto de arranque de la imagen con el comando "java -jar app.jar" que ejecutará nuestro componente.
 FROM openjdk:21
 EXPOSE 8082
-COPY --from=build /target/gateway-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /target/Librery-0.0.1-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
